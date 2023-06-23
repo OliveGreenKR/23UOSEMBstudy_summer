@@ -5,23 +5,32 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source Files\src">
+      <UniqueIdentifier>{05cbe12b-8fe3-47a6-969e-5612560e6a6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Student_Info.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="grade.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Student_Info.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Student_Info.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src</Filter>
     </ClInclude>
     <ClInclude Include="grade.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

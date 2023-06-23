@@ -1,7 +1,7 @@
+#include "pch.h"
 #include "Student_Info.h"
 
 using namespace std;
-#define OUT
 
 //스트림을 이용해 숙제 점수를 입력받아서 벡터에 저장
 istream& read_hw(istream& in, OUT vector<double>& hws) {
