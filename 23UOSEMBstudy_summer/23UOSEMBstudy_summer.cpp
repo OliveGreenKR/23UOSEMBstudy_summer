@@ -18,6 +18,7 @@ auto GetAvgFromVec = [](const vector<T>& vec) {  //lamda
 	return  sum / vec.size();
 };
 
+
 double grade(double midterm, double final, vector<double>& homeworks) {
 
     if (homeworks.size() == 0)
@@ -29,47 +30,80 @@ double grade(double midterm, double final, vector<double>& homeworks) {
 //스트림을 이용해 숙제 점수를 입력받아서 벡터에 저장
 istream& read_hw(istream& in, OUT vector<double>& hws) {
     if (in) {
-        
         hws.clear(); // make empty
-
         double x;
         while (in >> x) {
             hws.push_back(x);
         }
-
-        in.clear(); //clear stream
+        in.clear(); //clear stream for next.
     }
     return in;
 }
 
+/*******************
+*  prgram structualize
+*******************/
+
+
+struct Student_Info {
+    string name;
+    double midterm = 0;
+    double final = 0;
+    vector<double> hw = vector<double>(0.f);
+}; //dont forget to add ';'
+
+
+istream& read_student(istream& in, OUT Student_Info& student) {
+	in >> student.name >> student.midterm >> student.final;
+	read_hw(in, student.hw);
+    return in;
+}
+
+double grade(Student_Info& student) {
+    return grade(student.midterm, student.final, student.hw);
+}
+
+bool operator < (Student_Info& A, Student_Info& B) {  // 성적순으로 학생을 sorting 가능(오름차순)
+    return grade(A) < grade(B);
+}
+
+bool compare_name(const Student_Info& A, const Student_Info& B) { // 이름순으로  sorting 가능(오름차순)
+    return A.name < B.name;
+}
+
 int main()
 {
-    ios_base::sync_with_stdio(false); //FASTIO , dont use printf,scanf anymore
+    //ios_base::sync_with_stdio(false); //FASTIO , dont use printf,scanf anymore
 
-    string name;
-    cout << "student name : ";
-    cin >> name;
+    vector<Student_Info> students;
+    Student_Info record;
+
+    /*
+   jeong 10 20 30 40 50
+   kkk 10 20 50 60 30
+   ppp 10 30 50 20  ^D
+   ^D
+   */
+    while (read_student(cin, record)) {
+        students.push_back(record);
+    }
     
-    double midterm, final;
-    cout << "midterm and final : ";
-    cin >> midterm >> final; 
+    //::sort(students.begin(), students.end()); //성적순
+    ::sort(students.begin(), students.end(), compare_name); //이름순
 
-    vector<double> hw;
-    cout << "homeworks followd by EOF : ";
-    read_hw(::cin, hw);
+    for (auto& s : students) {
+        cout << s.name << "\n";
+        try {
+            double final_grade = grade(s);
+            streamsize prec = cout.precision();
 
-    try {
-        double final_grade = grade(midterm, final, hw);
-        streamsize prec = cout.precision(3);
-        cout << "yout final grade is : " << setprecision(3) << final_grade << setprecision(prec) << endl;
+            cout << setprecision(3) << final_grade << setprecision(prec);
+        }
+        catch (domain_error e) {
+            cout << e.what();
+        }
+        cout << endl;
     }
-    catch (domain_error) {
-        cin.clear();
-        cout << "you must enter your homework grades!\n"
-            << "Try Again";
-        return 1; //exit with error
-    }
-
     return 0;
 }
 
