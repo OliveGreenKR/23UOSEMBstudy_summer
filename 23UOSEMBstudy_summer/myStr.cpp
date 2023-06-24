@@ -1,29 +1,33 @@
 #include "pch.h"
 #include "myStr.h"
 #include <cctype>
+#include <algorithm>
 
+//반복자 어댑터를 이용해 수정해보기
 vector<string> split(const string& s) {
 	vector<string> ret;
-	typedef string::size_type string_size;
+	typedef string::const_iterator iter;
 
-	string_size i = 0;
+	iter i = s.begin();
 
-	while (i != s.size()) {
+	auto isSpace = [ ](char c) { return isspace(c); };
+	auto NotSpace = [ ](char c) { return !isspace(c); };
+
+	while (i != s.end()) {
 		//공백 무시
-		while ( i != s.size() && isspace(s[i]))
-			++i;
-		string_size j = i;
+		i = ::find_if(i, s.end(), NotSpace);
 
-		//단어의 끝찾기
-		while (j != s.size() && !isspace(s[j]))
-			j++;
+		//다음단어 끝 찾기
+		iter j = ::find_if(i, s.end(), isSpace);
 
-		//단어 복사
-		if (i != j) {
-			ret.push_back(s.substr(i, j-i)); 
-			i = j;
+		//복사
+		if (i != s.end()) {
+			ret.push_back(string(i, j));
 		}
+
+		i = j;
 	}
+
 	return ret;
 }
 

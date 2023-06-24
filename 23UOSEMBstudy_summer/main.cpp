@@ -14,15 +14,11 @@ int main()
 	vector<string> v;
     string s;
     while (cin >> s) {
-        v.push_back(s);
+        v = split(s);
+        for (auto& str : v) {
+            cout << str << "\n";
+        }
     }
-
-    auto framev = frame(v);
-
-    for (auto& s : framev)
-        cout << s << "\n";
-
-
     return 0;
 }
 
