@@ -31,6 +31,10 @@ vector<string> split(const string& s) {
 	return ret;
 }
 
+bool is_palindrome(const string& s) {
+	return equal(s.begin(), s.end(), s.rbegin());
+}
+
 size_t width(const vector<string>& v) {
 	size_t maxlen = 0;
 	for (auto& str : v)
