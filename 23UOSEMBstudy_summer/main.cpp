@@ -9,22 +9,19 @@
 
 int main()
 {
-    FASTIO
+    FASTIO;
 
+	vector<string> v;
     string s;
-
-    while (getline(cin, s)) {
-        vector<string> v = split(s);
-
-        for (auto& word : v)
-            cout << word << endl;
-    }
-
-    s.clear();
-
     while (cin >> s) {
-        cout << s << "\n";
+        v.push_back(s);
     }
+
+    auto framev = frame(v);
+
+    for (auto& s : framev)
+        cout << s << "\n";
+
 
     return 0;
 }

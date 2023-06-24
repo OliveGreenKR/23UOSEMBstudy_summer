@@ -26,3 +26,26 @@ vector<string> split(const string& s) {
 	}
 	return ret;
 }
+
+size_t width(const vector<string>& v) {
+	size_t maxlen = 0;
+	for (auto& str : v)
+		maxlen = ::max(maxlen, str.size());
+	return maxlen;
+}
+
+vector<string> frame(const vector<string>& v) {
+	vector<string> ret;
+	size_t maxlen = width(v);
+	string border(maxlen+4, '*');
+
+	ret.push_back(border); //상단 테두리 추가
+
+	//양끝 테두리 
+	for (auto& s : v) {
+		ret.push_back("* " + s + string(maxlen - s.size(), ' ')+ " *");
+	}
+
+	ret.push_back(border); //하단 테두리 추가
+	return ret;
+}
