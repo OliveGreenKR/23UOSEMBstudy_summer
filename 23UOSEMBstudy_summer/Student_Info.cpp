@@ -1,4 +1,7 @@
 #include "pch.h"
+#include <iostream>
+#include <string>
+#include <vector>
 #include "Student_Info.h"
 
 using namespace std;

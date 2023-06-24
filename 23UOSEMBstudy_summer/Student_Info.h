@@ -1,10 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <vector>
-using namespace std;
-
 struct Student_Info {
     string name;
     double midterm = 0;
