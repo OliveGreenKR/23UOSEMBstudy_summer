@@ -22,6 +22,9 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="myStr.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Student_Info.h">
@@ -32,6 +35,9 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="myStr.h">
+      <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

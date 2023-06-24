@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+#include <string>
+#include <vector>
 
 struct Student_Info {
     string name;
@@ -9,7 +12,7 @@ struct Student_Info {
 
 bool compare_name(const Student_Info& A, const Student_Info& B);
 
-istream& read_hw(istream& in, vector<double>& hws);
-istream& read_student(istream& in, Student_Info& student);
+istream& read_hw(istream& in, OUT vector<double>& hws);
+istream& read_student(istream& in, OUT Student_Info& student);
 
 bool compare_name(const Student_Info& A, const Student_Info& B);
