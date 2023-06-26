@@ -15,7 +15,7 @@ int main()
     map<string, int> counters;
 
     map<string, vector<int>> ret = xref(cin, find_urls);
-    map<string, vector<int>> ret = xref(cin); //split
+    map<string, vector<int>> ret2 = xref(cin); //split
 
     for (auto& m : ret) {
         cout << m.first << "\n";

@@ -2,7 +2,10 @@
 #include <vector>
 #include <string>
 #include <map>
+template < class Out>
+void split(const string& str, Out os);
 
+vector<string> split(const string& s); 
 vector<string> split(const string& s); 
 
 size_t width(const vector<string>& v);

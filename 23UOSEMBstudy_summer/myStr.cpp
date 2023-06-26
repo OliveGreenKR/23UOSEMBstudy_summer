@@ -4,7 +4,28 @@
 #include <algorithm>
 #include <iostream>
 
-//반복자 어댑터를 이용해 수정해보기
+//반복자를 통해 split 확장성 증가시켜보기
+template < class Out>
+void split(const string& str, Out os) {
+	using iter = string::const_iterator;
+	iter i = str.begin();
+
+	auto isSpace = [ ](char c) { return isspace(c); };
+	auto NotSpace = [ ](char c) { return !isspace(c); };
+
+	while (i != str.end()) {
+
+		i = find_if(i, str.end(), NotSpace);
+
+		iter j = find_if(i, str.end(), isSpace);
+
+		if (i != str.end())
+			*os++ = string(i, j);  //stl의 반복자 특성을 이용.
+
+		i = j;
+	}
+}
+
 vector<string> split(const string& s) {
 	vector<string> ret;
 	typedef string::const_iterator iter;
