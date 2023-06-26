@@ -80,14 +80,13 @@ vector<Student_Info> bad_extract_fails(OUT vector<Student_Info>& students) {
 	return fail;
 }
 
-//재배치 알고리즘을 이용해 한번만 순환하도록 수정한 버전
+//재배치 알고리즘을 이용해 한번만 순환하도록 수정한 버전 (약 2배이상 빠름)
 vector<Student_Info> extract_fails(vector<Student_Info>& students) {
 	vector<Student_Info>::iterator iter = ::stable_partition(students.begin(), students.end(), pgrade);
 	/*
 	 partition : 요소들을 카테고리로 구분하여 재배치
 	 stable_partition : 각테고리 안에서 요소 순서를 유지하면서 재배치
 	 return : 두 번째 카테고리의 첫번째 요소를 나타내는 반복자 반환.(fail 시작부분)
-
 	*/
 	vector<Student_Info> fail(iter, students.end());
 	students.erase(iter, students.end());
