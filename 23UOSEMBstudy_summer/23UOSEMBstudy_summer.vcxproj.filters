@@ -8,11 +8,11 @@
     <Filter Include="Source Files\src">
       <UniqueIdentifier>{05cbe12b-8fe3-47a6-969e-5612560e6a6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\main">
+      <UniqueIdentifier>{eb8adac7-66a5-4e5c-a5e3-0b57970226fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
     <ClCompile Include="grade.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -24,6 +24,9 @@
     </ClCompile>
     <ClCompile Include="myStr.cpp">
       <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

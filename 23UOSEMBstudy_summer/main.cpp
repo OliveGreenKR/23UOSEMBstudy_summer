@@ -1,6 +1,7 @@
 #include "pch.h"
 #include <iostream>
 #include <iomanip>  //setprecision
+#include <map>
 
 #include "Student_Info.h"
 #include "grade.h"
@@ -10,13 +11,14 @@ int main()
 {
     FASTIO;
 
-	vector<string> v;
     string s;
-    while (cin >> s) {
-        v = split(s);
-        for (auto& str : v) {
-            cout << str << "\n";
-        }
+    map<string, int> counters;
+
+    map<string, vector<int>> ret = xref(cin, find_urls);
+    map<string, vector<int>> ret = xref(cin); //split
+
+    for (auto& m : ret) {
+        cout << m.first << "\n";
     }
     return 0;
 }

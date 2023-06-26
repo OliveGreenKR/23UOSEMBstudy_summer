@@ -2,6 +2,7 @@
 #include "myStr.h"
 #include <cctype>
 #include <algorithm>
+#include <iostream>
 
 //반복자 어댑터를 이용해 수정해보기
 vector<string> split(const string& s) {
@@ -103,3 +104,29 @@ vector<string> find_urls(const string& s) {
 	}
 	return ret;
 }
+
+
+/*
+map
+*/
+
+map<string, vector<int>> xref(istream& in, vector<string> find_words(const string&)) {
+
+	string line;
+	int line_number = 0;
+	map<string, vector<int> > ret;
+
+	//다음행 읽기
+	while (getline(in, line)) {
+		++line_number;
+
+		//주어진 행을 함수를 통해 나눔.
+		vector<string> words = find_words(line);
+
+		//저장
+		for (auto word : words)
+			ret[word].push_back(line_number);
+	}
+	return ret;
+}
+
