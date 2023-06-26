@@ -57,3 +57,30 @@ vector<string> frame(const vector<string>& v) {
 	ret.push_back(border); //하단 테두리 추가
 	return ret;
 }
+
+
+/*
+URL찾기
+	URL = {protocol} + '://' + {resource}
+
+1. :// 를 찾음
+2. 그것을 기준으로 프로토콜과 리소스를 알 수 있음.
+*/
+
+vector<string> find_urls(const string& s) {
+	vector<string> ret;
+	using iter = string::const_iterator;
+	//typedef string::const_iterator  iter;
+
+	iter now = s.begin(), e = s.end();
+
+	while (now != e) {
+
+		// 1. '://'의  앞쪽을 탐색
+		// 2. 문자가 존재한다면 url의 나머지를 탐색
+		// 3. url을 완성하여 vector에 push
+		// 4. now 증가
+
+	}
+
+}
