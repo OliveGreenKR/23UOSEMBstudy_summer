@@ -58,25 +58,6 @@ vector<string> frame(const vector<string>& v) {
 	return ret;
 }
 
-
-vector<string> find_urls(const string& s) {
-	vector<string> ret;
-	using iter = string::const_iterator;
-	//typedef string::const_iterator  iter;
-
-	iter b = s.begin(), e = s.end();
-
-	while (b != e) {
-		b = url_beg(b, e);
-		if (b!=e) {
-			iter after = url_end(b, e);
-			ret.push_back(string(b, after));
-			b = after;
-		}
-	}
-	return ret;
-}
-
 bool not_url_char(char c) {
 	static const string url_ch = "~;/?:@=&$-_.+!*'(),"; //url에 들어갈 수 있는 특수 문자.
 	return !(::isalnum(c) || ::find(url_ch.begin(), url_ch.end(), c) != url_ch.end());
@@ -103,4 +84,22 @@ string::const_iterator url_beg(string::const_iterator b, string::const_iterator 
 		i += sep.size();
 	}
 	return e;
+}
+
+vector<string> find_urls(const string& s) {
+	vector<string> ret;
+	using iter = string::const_iterator;
+	//typedef string::const_iterator  iter;
+
+	iter b = s.begin(), e = s.end();
+
+	while (b != e) {
+		b = url_beg(b, e);
+		if (b!=e) {
+			iter after = url_end(b, e);
+			ret.push_back(string(b, after));
+			b = after;
+		}
+	}
+	return ret;
 }
