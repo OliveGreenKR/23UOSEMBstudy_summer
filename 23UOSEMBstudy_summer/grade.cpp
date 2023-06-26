@@ -4,52 +4,108 @@
 #include "grade.h"
 #include "Student_Info.h"
 #include <ios> //for domain_error
+#include <numeric> //accumulate
+#include <algorithm>
 
-template <typename T = double>
-auto GetAvgFromVec = [ ](const vector<T>& vec) {  //lamda
-	T sum = 0;
-	for (auto& e : vec)
-		sum += e;
-	return  sum / vec.size();
-};
+double getAverage(const vector<double>& v) {
+	return ::accumulate(v.begin(), v.end(), 0.0) / v.size();  //return 타입을 위해 *0.0
+}
 
-
-double grade(double midterm, double final, vector<double>& homeworks) {
+double grade(const double midterm, const  double final, const vector<double>& homeworks) {
 
     if (homeworks.size() == 0)
         throw domain_error("student has done no homework");
 
-    return 0.4 * midterm  + 0.4 * final + 0.2 * GetAvgFromVec<double>(homeworks);
+    return 0.4 * midterm  + 0.4 * final + 0.2 * getAverage(homeworks);
 }
 
-double grade(Student_Info& student) {
+double grade(const Student_Info& student) {
     return grade(student.midterm, student.final, student.hw);
 }
 
 
+//grade라는 같은 이름의 다른 프로토타입을 가진 함수가 많다.
+//함수객체를 인자로 넘겨줄 때 구분할 방법이 현재 없음 -> 보조함수를 넘겨주고 여기에서 판별하도록 함.
+//함수 버전을 쉽게 관리하면서, 예외 처리도 함께 가능.
+double grade_aux(const Student_Info& s) {
+
+	try {
+		return grade(s);
+	}
+	catch (domain_error) {
+		//과제를 하나도 안함.
+		vector<double> hw(1, 0);
+		return grade(s.midterm, s.final, hw);
+	}
+}
+
+
+//학생 상태 분류
+bool did_all_hw(const Student_Info& s) {
+	return ::find_if(s.hw.begin(), s.hw.end(), 0) ==  s.hw.end();
+}
+
+double average_analysis(const vector<Student_Info>& students) {
+	vector<double> grades;
+	//transform(범위시작,범위끝,결과저장위치,실행할함수)
+	//단항 연산자 template이므로 const를 인자로 넘겨준다.
+	::transform(students.begin(), students.end(), ::back_inserter(grades), grade_aux);
+	return getAverage(grades);
+}
+
+
 //낙제 여부 판별 추가
-bool fgrade(Student_Info& student) {
+bool fgrade(const Student_Info& student) {
 	return grade(student) < 60;
 }
 
-//기존 학생들에게서 낙제 학생들을 제거하고, 낙제 학생들을 반환
-list<Student_Info> extract_fails_and_return(OUT list<Student_Info>& students) {
+bool pgrade(const Student_Info& student) {
+	return !fgrade(student);
+}
+
+
+vector<Student_Info> bad_extract_fails(OUT vector<Student_Info>& students) {
+	vector<Student_Info> fail;
+	::remove_copy_if(students.begin(), students.end(), back_inserter(fail), pgrade);//제거하고 남은 값 복사
+	students.erase(remove_if(students.begin(), students.end(), fgrade),students.end());
+	/*remove의 동작을 이해해야함.
+	remove의 제거는 '덮어씌우기' 이다.
+	동작이 끝나면 반환한 it이후에는 garbage값이 쌓이게 된다.
+	이를 erase를 통해 지워버리는 것
+	이렇게 지우기까지 끝나면, 
+	student에는 통과한 학생들만 남게된다.
+	*/
+
+	//이방법은 벡터를 2번 순환한다. (remove_if, remove_copy_if)
+	return fail;
+}
+
+//재배치 알고리즘을 이용해 한번만 순환하도록 수정한 버전
+vector<Student_Info> extract_fails(vector<Student_Info>& students) {
+	vector<Student_Info>::iterator iter = ::stable_partition(students.begin(), students.end(), pgrade);
+	/*
+	 partition : 요소들을 카테고리로 구분하여 재배치
+	 stable_partition : 각테고리 안에서 요소 순서를 유지하면서 재배치
+	 return : 두 번째 카테고리의 첫번째 요소를 나타내는 반복자 반환.(fail 시작부분)
+
+	*/
+	vector<Student_Info> fail(iter, students.end());
+	students.erase(iter, students.end());
+	return fail;
+}
+
+
+list<Student_Info> extract_fails(OUT list<Student_Info>& students) {
 	list<Student_Info> fail;
 	auto iter = students.begin();
 	while (iter != students.end()) {
 		if (fgrade(*iter)) {
 			fail.push_back(*iter);
-			iter = students.erase(iter);  //**  erase된후의 다음 iter를 반환 해준다.
-			// enditer역시 순환문을 돌 때마다 값을 구해야한다. 미리 저장하지 말기.
+			iter = students.erase(iter);  
+			
 		}
 		else
-			++iter; //pre++가 좀더 빠름
+			++iter; 
 	}
 	return fail;
 }
-//메모리 공간을 너무 많이 사용한다. 그렇다고 중간중간 삭제하는 것은 vector의 동작에 어울리지 않고 비효율적이다.
-//벡터는 erase 메소드를 제공은 하지만, 매우 비효율적. 벡터는 인덱스를 통한 접근과, 맨 끝의 원소의 추가 및 삭제가 가장 이상적이다.
-//list 사용해볼까?
-//list는 중간 삽입 및 삭제에도 자료구조가 무너지지 않는다.
-//단, list의 정렬은 내부 메소드를 사용해야함. 
-// list.sort(pred)
