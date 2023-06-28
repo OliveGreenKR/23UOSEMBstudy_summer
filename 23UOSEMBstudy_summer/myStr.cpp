@@ -126,7 +126,6 @@ vector<string> find_urls(const string& s) {
 	return ret;
 }
 
-
 /*
 map
 */

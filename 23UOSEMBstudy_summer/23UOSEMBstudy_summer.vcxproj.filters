@@ -25,9 +25,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files\main</Filter>
     </ClCompile>
-    <ClCompile Include="grade.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Student_Info.h">
@@ -37,9 +34,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="myStr.h">
-      <Filter>Source Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="grade.h">
       <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>
