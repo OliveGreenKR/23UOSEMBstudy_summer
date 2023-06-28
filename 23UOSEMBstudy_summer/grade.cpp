@@ -20,7 +20,7 @@ double grade(const double midterm, const  double final, const vector<double>& ho
 }
 
 double grade(const Student_Info& student) {
-    return grade(student.midterm, student.final, student.hw);
+    return grade(student._midterm, student._final, student._homework);
 }
 
 
@@ -35,14 +35,14 @@ double grade_aux(const Student_Info& s) {
 	catch (domain_error) {
 		//과제를 하나도 안함.
 		const vector<double> hw(1, 0.0);
-		return grade(s.midterm, s.final, hw);
+		return grade(s._midterm, s._final, hw);
 	}
 }
 
 
 //학생 상태 분류
 bool did_all_hw(const Student_Info& s) {
-	return ::find(s.hw.begin(), s.hw.end(), 0.0) ==  s.hw.end();
+	return ::find(s._homework.begin(), s._homework.end(), 0.0) ==  s._homework.end();
 }
 
 double average_analysis(const vector<Student_Info>& students) {

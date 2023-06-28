@@ -4,15 +4,11 @@
 #include <vector>
 
 struct Student_Info {
-    string name;
-    double midterm = 0.0;
-    double final = 0.0;
-    vector<double> hw = vector<double>(0.);
-}; //dont forget to add ';'
+    string _name;
+    double _midterm = 0.0;
+    double _final = 0.0;
+    vector<double> _homework = vector<double>(0.);
 
-bool compare_name(const Student_Info& A, const Student_Info& B);
-
-istream& read_hw(istream& in, OUT vector<double>& hws);
-istream& read_student(istream& in, OUT Student_Info& student);
-
-bool compare_name(const Student_Info& A, const Student_Info& B);
+    std::istream& read(std::istream& );
+    double grade() const;  //const  : 해당 함수의 호출은 Student_Info의 정보를 바꾸지 않을 것이다.
+}; 
