@@ -11,8 +11,9 @@ int main(int argc, char** argv)
 {
     //argc =  명령어 개수, 기본 1개(실행파일 이름)
     //argv = 명령어 포인터
-
+    
     FASTIO;
+    
     vector<Student_Info> students;
     Student_Info record;
 
