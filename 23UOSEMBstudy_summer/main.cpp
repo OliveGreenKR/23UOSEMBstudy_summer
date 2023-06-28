@@ -6,6 +6,7 @@
 #include "Student_Info.h"
 #include "myStr.h"
 
+
 int main()
 {
     FASTIO;
@@ -13,7 +14,6 @@ int main()
     Student_Info record;
 
     size_t maxlen = 0;
-
     while (record.read(cin)) {
         maxlen = ::max(maxlen, record.name().size());
         students.push_back(record);
