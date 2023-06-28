@@ -38,12 +38,16 @@ bool compare_name(const Student_Info& A, const Student_Info& B) {
 * Student_Info::
 **********************/
 
+Student_Info::Student_Info(std::istream& is) {
+    read(is);
+}
+
 std::istream& Student_Info::read(std::istream& in) {
-    in >> _name >> _midterm >> _final; //해당 클래스에 별다른 선언없이도 접근 가능.
+    in >> _name >> _midterm >> _final; 
     read_hw(in, _homework);
     return in;
 }
 
 double Student_Info::grade() const {
-    return ::grade(_midterm, _final, _homework); //::를 통해 grade함수 확정! 
+    return ::grade(_midterm, _final, _homework);  
 }
