@@ -2,4 +2,4 @@
 
 For 2023 UOS EMB Summer Study.
 
-based on Accellerated C++  translated KR.
+based on Accelerated C++  translated KR.
