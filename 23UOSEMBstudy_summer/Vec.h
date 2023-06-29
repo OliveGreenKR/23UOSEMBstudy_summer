@@ -41,8 +41,8 @@ public:
 
 private:
 	void create();
-	void create(size_t n, const T& val);
-	void create(const_iterator begin, const_iterator right);
+	void create(size_type, const T&);
+	void create(const_iterator, const_iterator);
 
 	void uncreate();
 
@@ -51,9 +51,9 @@ private:
 
 
 private:
-	iterator _data;	
-	iterator _avail;
-	iterator _limit;	
+	iterator _data =  nullptr;	
+	iterator _avai =  nullptr;
+	iterator _limit=  nullptr;	
 
 	allocator<T> _alloc;
 };
@@ -61,7 +61,7 @@ private:
 
 /*
 확립된 class invariant
-1. _data는 첫 번째 데이터 요소를 가리키며, 존재하지 않는다면 data값은 0이다.
+1. _data는 첫 번째 데이터 요소를 가리키며, 존재하지 않는다면 data는 nullptr이다.
 2. _data <= _avail <= _limit
 3. 요소들은 [_data,_avail) 안에 생성됨,
 4. 요소들은 [_avial,_limit)안에 생성되지 않음.
