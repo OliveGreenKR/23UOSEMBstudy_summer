@@ -144,11 +144,13 @@
     </ClCompile>
     <ClCompile Include="myStr.cpp" />
     <ClCompile Include="Student_Info.cpp" />
+    <ClCompile Include="Vec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myStr.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Student_Info.h" />
+    <ClInclude Include="Vec.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

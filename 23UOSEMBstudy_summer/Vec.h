@@ -18,5 +18,20 @@
 		ㄴ begin iterator
 		ㄴ end iterator
 */
-class Vec {};
+
+template <class T> 
+class Vec {
+public:
+	/*
+	* begin, end
+	* size =  (end-begin)으로 구현 
+	* 
+	*/
+
+private:
+	/*
+	* 요소 저장 공간(동적 할당)
+	* 데이터 시작(begin) 포인터, 끝 포인터(end)
+	*/
+};
 
