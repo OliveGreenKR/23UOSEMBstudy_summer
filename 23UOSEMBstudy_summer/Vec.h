@@ -22,16 +22,11 @@
 template <class T> 
 class Vec {
 public:
-	/*
-	* begin, end
-	* size =  (end-begin)으로 구현 
-	* 
-	*/
+	Vec() :{ create(); }
+	explicit Vec(size_t n, const T& val = T()) { create(n, val); }
 
 private:
-	/*
-	* 요소 저장 공간(동적 할당)
-	* 데이터 시작(begin) 포인터, 끝 포인터(end)
-	*/
+	T* _data;	// data pointer
+	T* _limit;	// end pointer
 };
 
