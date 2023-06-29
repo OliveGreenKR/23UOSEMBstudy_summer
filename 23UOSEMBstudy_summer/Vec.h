@@ -7,7 +7,7 @@ public:
 	using const_iterator = const T*;
 	using size_type = size_t;
 	using value_type = T;
-	using difference_type = signed int;
+	using difference_type = ptrdiff_t;
 	using reference = T&;
 	using const_reference = const T&;
 
@@ -52,7 +52,7 @@ private:
 
 private:
 	iterator _data =  nullptr;	
-	iterator _avai =  nullptr;
+	iterator _avail =  nullptr;
 	iterator _limit=  nullptr;	
 
 	allocator<T> _alloc;

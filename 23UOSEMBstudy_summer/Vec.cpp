@@ -48,7 +48,21 @@ void Vec<T>::uncreate() {
 
 template<class T>
 void Vec<T>::grow() {
+	//현재 2배의 공간 할당.
+	size_type new_size = max(2*(_limit - _data), ptrdiff_t(1));
+
+	//새로운 곳으로 복사
+	iterator new_data = _alloc.allocate(new_size);
+	iterator new_avail = ::uninitialized_copy(_data, _avail, new_data);
+	//기존 반환
+	uncreate();
+	//포인터 재설정
+	_data = new_data;
+	_avail = new_avail;
+	_limit = _data + new_size;
 }
 
 template<class T>
-void Vec<T>::unchecked_append(const T& val) { }
+void Vec<T>::unchecked_append(const T& val) {
+	_alloc.construct(_avail++, val); //초기화 되어있지않은 공간에 객체 생성.
+}
