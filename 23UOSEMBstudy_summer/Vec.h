@@ -19,14 +19,27 @@
 		ㄴ end iterator
 */
 
+
 template <class T> 
 class Vec {
 public:
-	Vec() :{ create(); }
+	using iterator = T*;
+	using cosnt_iterator = const T*;
+	using size_type = size_t;
+	using value_type = T;
+	using difference_type = signed int;
+	using reference = T&;
+	using const_reference = const T&;
+
+	Vec() { create(); }
 	explicit Vec(size_t n, const T& val = T()) { create(n, val); }
+
+private:
+
 
 private:
 	T* _data;	// data pointer
 	T* _limit;	// end pointer
 };
 
+//표준 템플릿 클래스의 규범에 따르면 프로그래머가 사용할 수 있는 타입 이름을 제공하되 자세한 구현은 숨겨야한다.
