@@ -24,7 +24,15 @@ public:
 	}
 
 public:
+	char& operator[](size_type i) { return _data[i]; }
+	const char& operator[](size_type i) const { return _data[i]; }
+	Str& operator+= (const Str& s) {
+		std::copy(s._data.begin(), s._data.end(), std::back_inserter(_data));
+		return *this;
+	}
+
 	size_type size() const { return _data.size(); }
+
 
 private:
 	Vec<char> _data;
@@ -33,3 +41,4 @@ private:
 //입출력 연산자
 std::istream& operator>>(std::istream&, Str&);
 std::ostream& operator<<(std::ostream&, const Str&);
+Str operator+ (const Str& s, const Str& t);
