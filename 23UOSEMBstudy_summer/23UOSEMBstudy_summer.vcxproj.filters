@@ -11,13 +11,13 @@
     <Filter Include="Source Files\main">
       <UniqueIdentifier>{eb8adac7-66a5-4e5c-a5e3-0b57970226fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\pch">
+      <UniqueIdentifier>{ef8abf8e-b9c6-4bef-95f4-760d36360921}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Student_Info.cpp">
       <Filter>Source Files\src</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="myStr.cpp">
       <Filter>Source Files\src</Filter>
@@ -26,21 +26,30 @@
       <Filter>Source Files\main</Filter>
     </ClCompile>
     <ClCompile Include="Vec.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source Files\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Str.cpp">
+      <Filter>Source Files\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Student_Info.h">
-      <Filter>Source Files\src</Filter>
+    <ClInclude Include="Vec.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Student_Info.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="myStr.h">
-      <Filter>Source Files\src</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Str.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Source Files\pch</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -143,12 +143,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="myStr.cpp" />
+    <ClCompile Include="Str.cpp" />
     <ClCompile Include="Student_Info.cpp" />
     <ClCompile Include="Vec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="myStr.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Str.h" />
     <ClInclude Include="Student_Info.h" />
     <ClInclude Include="Vec.h" />
   </ItemGroup>
