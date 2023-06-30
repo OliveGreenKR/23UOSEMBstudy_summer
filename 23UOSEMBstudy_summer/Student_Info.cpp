@@ -64,3 +64,7 @@ std::istream& Student_Info::read(std::istream& in) {
 double Student_Info::grade() const {
     return ::grade(_midterm, _final, _homework);  
 }
+
+Student_Info::operator double() const {
+    return grade();
+}
