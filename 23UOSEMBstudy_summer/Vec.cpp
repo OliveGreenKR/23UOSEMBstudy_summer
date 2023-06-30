@@ -2,6 +2,13 @@
 #include "Vec.h"
 
 template<class T>
+void Vec<T>::clear() {
+	if (_data != nullptr) {
+		_avail = _data = nullptr;
+	}
+}
+
+template<class T>
 Vec<T>& Vec<T>::operator=(const Vec& rhs) {
 	//자가할당 여부 확인
 	if (&rhs != this) {

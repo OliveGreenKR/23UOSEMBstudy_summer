@@ -19,6 +19,7 @@ public:
 
 public:
 	size_type size() const					{ return _avail - _data; } 
+	void clear();
 
 	T& operator[](size_type i)				{ return _data[i]; }
 	const T& operator[](size_type i) const	{ return _data[i]; }
