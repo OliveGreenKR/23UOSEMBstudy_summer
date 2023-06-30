@@ -92,7 +92,7 @@ void Vec<T>::create(size_type n, const T& val) {
 
 template<class T>
 void Vec<T>::create(const_iterator i, const_iterator j) {
-	_data = _alloc.allocate(j-1);
+	_data = _alloc.allocate(j-i);
 	_limit = _avail = ::uninitialized_copy(i, j, _data);
 	//[i,j)를 _dat에 초기화 한후 마지막 요소의 다음을 가리키는 포인터 반환
 }
