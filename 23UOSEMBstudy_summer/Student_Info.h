@@ -12,8 +12,10 @@ public:
 public: 
 	bool valid() const { return !_homework.empty(); } //비어있는 객체에 대한 잠재적인 예외를 회피가능
 	std::string name() const { return _name; }
-	std::istream& read(std::istream&);
+
+	virtual std::istream& read(std::istream&);
 	virtual double grade() const;
+
 	operator double() const;
 
 protected:

@@ -37,12 +37,6 @@ bool compare_name(const Core& A, const Core& B) {
 bool compare_grade(const Core& A, const Core& B) {
     return A.grade() < B.grade();
 }
-/*
-* Grad 클래스는 grade함수를 재정의 한다. 위의 함수는 어떻게 동작할까?
-* Grad 클래스를 넘겨도 Core::grade가 발동됨.
-* 
-* 이를 런타임에 결정하게 하는 방법은 바로, '가상함수' 이다.
-*/
 
 //최종점수를 문자로 변환
 string letter_grade(double grade) {
