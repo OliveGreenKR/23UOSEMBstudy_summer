@@ -93,3 +93,35 @@ std::istream& Grad::read(std::istream& in) {
     read_hw(in, _homework);
     return in;
 }
+
+
+/**************
+* Student_info
+*****************/
+
+std::istream& Student_info::read(std::istream& is) {
+    
+    delete _cp;  //nulltpr의 경우 아무것도 동작하지 않는다.
+
+    char ch;
+    is >> ch;
+
+    if(ch == Student::core)
+        _cp = new Core(is);
+    else
+        _cp =  new Grad(is);
+
+    return is;
+}
+
+std::string Student_info::name() const {
+    if(_cp)
+        return _cp->name();
+    throw std::runtime_error("uninitiallized Student");
+}
+
+double Student_info::grade() const {
+    if(_cp)
+        return _cp->grade();
+    throw std::runtime_error("uninitiallized Student");
+}

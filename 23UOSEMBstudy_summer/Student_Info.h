@@ -45,3 +45,43 @@ public:
 private:
 	double _thesis;
 };
+
+
+//핸들 클래스
+class Student_info {
+
+	enum Student : char {
+		core	= 'U',
+		grad    = 'G',
+	};
+
+public:
+	Student_info() : _cp(nullptr) { }
+	Student_info(std::istream& is) : _cp(nullptr) { read(is); }
+	Student_info(const Student_info& s);
+	Student_info operator= (const Student_info& s);
+
+	~Student_info(){ delete _cp; }
+public:
+	std::istream& read(std::istream&);
+	std::string name() const;
+	double grade() const;
+
+	static bool compare_name(const Student_info& s1, const Student_info& s2) {
+		return s1.name() < s2.name();
+	}
+
+private:
+	Core* _cp;
+};
+
+/*정적 멤버 함수
+* 정적 멤버 함수는 해당 클래스 타입의 객체를 이용해 호출 하지 않는다.
+* 정적 멤버 함수는 일반적인 멤버 함수와는 다르게 해당 클래스와 연관될 뿐, 특정 객체와 
+* 연관 되지 않는다.
+* 
+* 따라서 정적 멤버 함수는 클래스 객체의 정적이지 않은 데이터 멤버에 접근할 수 없다.
+* 
+* 외부에서 사용할 때, Student_info::compare_name
+* 함수라고 범위 연산자를 명시해야하기 때문에, 연관성을 알 수 있도록 한다.
+*/
