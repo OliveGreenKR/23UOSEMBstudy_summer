@@ -9,6 +9,9 @@ public:
 	//생성자 및 소멸자
 	Core() : _midterm(0), _final(0) { }; //기본 생성자 + 멤버 변수 초기화
 	Core(std::istream& is) { read(is); };
+
+	virtual ~Core() { }
+
 public: 
 	bool valid() const { return !_homework.empty(); } //비어있는 객체에 대한 잠재적인 예외를 회피가능
 	std::string name() const { return _name; }
