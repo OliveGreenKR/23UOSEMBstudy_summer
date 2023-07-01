@@ -6,6 +6,9 @@
 #include "Student_Info.h"
 #include "myStr.h"
 
+bool compare_core_ptrs_name(const Core* p1, const Core* p2) {
+    return compare_name(*p1,*p2);
+}
 
 int main(int argc, char** argv)
 {
@@ -13,36 +16,48 @@ int main(int argc, char** argv)
     
 
     /* 타입 의존성을 가지는 부분
-    * 1. 학생 정보를 읽어 저장하는 벡터의 정의문
-    * 2. 학생 정보를 읽어 들이는 일시적 지역 변수 정의문
-    * 3. read함수
-    * 4. grade함수
+    * 1. 학생 정보를 읽어 저장하는 벡터의 정의문(students)
+    * 2. 학생 정보를 읽어 들이는 일시적 지역 변수 정의문(record)
+    * 3. read함수   ->  가상 함수로 해결 
+    * 4. grade함수  ->  가상 함수로 해결
     */
 
     FASTIO;
-    
-    vector<Core> students;
-    Core record;
 
+    /* 1,2를 해결할 첫 번째 방법.
+    * 포인터를 다루도록 하기
+    */
+    
+    vector<Core*> students;
+    Core* record;
+
+    char ch; //파일에서  Core/Grad를 구분할 접두어가 있다고 가정.
     size_t maxlen = 0;
-    while (record.read(cin)) {
-        maxlen = ::max(maxlen, record.name().size());
+    while (cin >> ch) {
+        if(ch == 'U')
+            record =  new Core;
+        else
+            record = new Grad;
+		record->read(cin);
+        maxlen = ::max(maxlen, record->name().size());
         students.push_back(record);
     }
 
-    ::sort(students.begin(), students.end(), compare_name);
+    ::sort(students.begin(), students.end(), compare_core_ptrs_name);
 
     for (auto& student : students) {
-        cout << student.name() << string(maxlen+1-student.name().size(), ' ');
+        cout << student->name() << string(maxlen+1-student->name().size(), ' ');
 
         try {
-            double final_grade = student.grade();
+            double final_grade = student->grade();
             streamsize prec = cout.precision();
             cout << setprecision(3) << final_grade << setprecision(prec) << endl;
         }
         catch (domain_error e) {
             cout << e.what() << endl;
         }
+
+        delete student;
     }
 
     return 0;
