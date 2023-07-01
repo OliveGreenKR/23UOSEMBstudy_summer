@@ -14,8 +14,8 @@ int main(int argc, char** argv)
     
     FASTIO;
     
-    vector<Student_Info> students;
-    Student_Info record;
+    vector<Core> students;
+    Core record;
 
     size_t maxlen = 0;
     while (record.read(cin)) {

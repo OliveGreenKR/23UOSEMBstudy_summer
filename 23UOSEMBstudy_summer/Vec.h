@@ -60,6 +60,15 @@ private:
 };
 
 
+/*
+확립된 class invariant
+1. _data는 첫 번째 데이터 요소를 가리키며, 존재하지 않는다면 data는 nullptr이다.
+2. _data <= _avail <= _limit
+3. 요소들은 [_data,_avail) 안에 생성됨,
+4. 요소들은 [_avial,_limit)안에 생성되지 않음.
+*/
+
+
 template<class T>
 void Vec<T>::clear() {
 	if (_data != nullptr) {
@@ -133,10 +142,3 @@ void Vec<T>::unchecked_append(const T& val) {
 	_alloc.construct(_avail++, val); //초기화 되어있지않은 공간에 객체 생성.
 }
 
-/*
-확립된 class invariant
-1. _data는 첫 번째 데이터 요소를 가리키며, 존재하지 않는다면 data는 nullptr이다.
-2. _data <= _avail <= _limit
-3. 요소들은 [_data,_avail) 안에 생성됨,
-4. 요소들은 [_avial,_limit)안에 생성되지 않음.
-*/

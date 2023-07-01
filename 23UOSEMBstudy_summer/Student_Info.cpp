@@ -30,7 +30,7 @@ istream& read_hw(istream& in, OUT vector<double>& hws) {
     return in;
 }
 
-bool compare_name(const Student_Info& A, const Student_Info& B) {
+bool compare_name(const Core& A, const Core& B) {
     return A.name() < B.name(); 
 }
 
@@ -51,20 +51,20 @@ string letter_grade(double grade) {
 * Student_Info::
 **********************/
 
-Student_Info::Student_Info(std::istream& is) {
+Core::Core(std::istream& is) {
     read(is);
 }
 
-std::istream& Student_Info::read(std::istream& in) {
+std::istream& Core::read(std::istream& in) {
     in >> _name >> _midterm >> _final; 
     read_hw(in, _homework);
     return in;
 }
 
-double Student_Info::grade() const {
+double Core::grade() const {
     return ::grade(_midterm, _final, _homework);  
 }
 
-Student_Info::operator double() const {
+Core::operator double() const {
     return grade();
 }
