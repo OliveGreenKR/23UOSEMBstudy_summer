@@ -13,7 +13,7 @@ public:
 	bool valid() const { return !_homework.empty(); } //비어있는 객체에 대한 잠재적인 예외를 회피가능
 	std::string name() const { return _name; }
 	std::istream& read(std::istream&);
-	double grade() const;
+	virtual double grade() const;
 	operator double() const;
 
 protected:
@@ -26,13 +26,13 @@ private:
 };
 
 bool compare_name(const Core& A, const Core& B);
+bool compare_grade(const Core& A, const Core& B);
 
 //대학원생 [name][mid][final][thesis][hws...]
 class Grad : public Core {
 public:
 	Grad() : _thesis(0) { };
 	Grad(std::istream& is) { read(is); }; // Core() : ... -> Grad(is) { Grad::read(is); }  
-	
 
 	double grade() const;
 	std::istream& read(std::istream&);
