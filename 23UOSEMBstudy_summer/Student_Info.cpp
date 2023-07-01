@@ -30,14 +30,6 @@ istream& read_hw(istream& in, OUT vector<double>& hws) {
     return in;
 }
 
-bool compare_name(const Core& A, const Core& B) {
-    return A.name() < B.name(); 
-}
-
-bool compare_grade(const Core& A, const Core& B) {
-    return A.grade() < B.grade();
-}
-
 //최종점수를 문자로 변환
 string letter_grade(double grade) {
     static const double numbers[] = {97,94,90,87,84,80,77,74,70,60,0};
@@ -98,6 +90,23 @@ std::istream& Grad::read(std::istream& in) {
 /**************
 * Student_info
 *****************/
+
+Student_info::Student_info(const Student_info& s) :_cp(nullptr) {
+    if (s._cp)
+        _cp = s._cp->clone();
+}
+
+Student_info Student_info::operator=(const Student_info& s) {
+    if (&s != this) {
+        delete _cp;
+        if(s._cp)
+            _cp = s._cp->clone();
+        else
+            _cp = nullptr;
+    }
+    return *this;
+}
+
 
 std::istream& Student_info::read(std::istream& is) {
     

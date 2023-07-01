@@ -5,6 +5,8 @@
 
 //학생들의 공통 정보를 다루는 클래스 [name][mid][final][hws...]
 class Core {
+	friend class Student_info;
+
 public:
 	//생성자 및 소멸자
 	Core() : _midterm(0), _final(0) { }; //기본 생성자 + 멤버 변수 초기화
@@ -23,6 +25,8 @@ public:
 
 protected:
 	std::istream& read_common(std::istream&);
+	virtual Core* clone() const { return new Core(*this); }
+
 	double _midterm = 100.0; //직접 값 지정은 이니셜라이저보다 먼저 실행되므로, 덮어씌어진다.
 	double _final = 0.0;
 	vector<double> _homework = vector<double>(0.);
@@ -30,17 +34,28 @@ private:
 	string _name;
 };
 
-bool compare_name(const Core& A, const Core& B);
-bool compare_grade(const Core& A, const Core& B);
+//bool compare_name(const Core& A, const Core& B);
+//bool compare_grade(const Core& A, const Core& B);
 
 //대학원생 [name][mid][final][thesis][hws...]
 class Grad : public Core {
+	//Student_info 를  friend로 할 필요는 없다.
+	//Student_info는 Core*를 사용하기에, 직접적으로 Grad의 clone함수에 접근하지 않기 때문.
+	//Student_info는 가상함수인 Core::clone()만 호출할 뿐이다.
 public:
 	Grad() : _thesis(0) { };
 	Grad(std::istream& is) { read(is); }; // Core() : ... -> Grad(is) { Grad::read(is); }  
 
 	double grade() const;
 	std::istream& read(std::istream&);
+
+protected:
+	Grad* clone() const { return new Grad(*this); }
+	/*
+	* 일반적으로 가상함수를 재정의할 때는 함수의 프로토타입이 모두 같아야한다.
+	* 그러나 예외적으로, 기본 클래스의 함수가 기본클래스의 참조/포인터를 반환할 때는
+	* 파생 클래스는 그것을 본인의 타입의 그것으로 반환할 수 있다.
+	*/
 
 private:
 	double _thesis;
@@ -75,13 +90,12 @@ private:
 	Core* _cp;
 };
 
-/*정적 멤버 함수
-* 정적 멤버 함수는 해당 클래스 타입의 객체를 이용해 호출 하지 않는다.
-* 정적 멤버 함수는 일반적인 멤버 함수와는 다르게 해당 클래스와 연관될 뿐, 특정 객체와 
-* 연관 되지 않는다.
+/*Wrapper class의 복사 생성자, 할당 연산자
+* 새로운 객체를 위한 공간을 할당하고 값을 초기화 해야함.
+* 복사하려는 객체의 종류를 알아야한다.
+* 포인터로는 Core 인지 Core에서 파생한 클래스 인지 알 수 없음.
 * 
-* 따라서 정적 멤버 함수는 클래스 객체의 정적이지 않은 데이터 멤버에 접근할 수 없다.
-* 
-* 외부에서 사용할 때, Student_info::compare_name
-* 함수라고 범위 연산자를 명시해야하기 때문에, 연관성을 알 수 있도록 한다.
+* >> 해결을 위해 복사역할의 가상함수를 추가한다.
+*    또한, 이것은 인터페이스가 아니기 때문에 protected의 영역으로 할것.
+* >> Wrapper Class를 Core의 friend로 해야함.
 */
