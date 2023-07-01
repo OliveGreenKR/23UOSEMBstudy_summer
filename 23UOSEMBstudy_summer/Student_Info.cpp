@@ -48,16 +48,18 @@ string letter_grade(double grade) {
 }
 
 /**********************
-* Student_Info::
+* Core::
 **********************/
-
-Core::Core(std::istream& is) {
-    read(is);
-}
 
 std::istream& Core::read(std::istream& in) {
     in >> _name >> _midterm >> _final; 
     read_hw(in, _homework);
+    return in;
+}
+
+//read student except hw
+std::istream& Core::read_common(std::istream& in) {
+    in >> _name >> _midterm >> _final;
     return in;
 }
 
@@ -67,4 +69,23 @@ double Core::grade() const {
 
 Core::operator double() const {
     return grade();
+}
+
+
+
+/**********************
+* Grad::
+**********************/
+
+double Grad::grade() const { //재정의
+    return ::min(Core::grade(),_thesis);
+    //여기는 범위 연산자를빼면, Grad::grade의 무한 호출이 발생한다.
+}
+
+std::istream& Grad::read(std::istream& in) {
+    Core::read_common(in);    // 부모의 메소드 사용
+    //read_common(in);        // 이것도 가능
+    in >> _thesis;
+    read_hw(in, _homework);
+    return in;
 }

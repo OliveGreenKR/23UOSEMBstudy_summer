@@ -3,14 +3,12 @@
 #include <string>
 #include <vector>
 
-bool compare_name(const Core& A, const Core& B);
-
-//학생들의 공통 정보를 다루는 클래스
+//학생들의 공통 정보를 다루는 클래스 [name][mid][final][hws...]
 class Core {
 public:
 	//생성자 및 소멸자
 	Core() : _midterm(0), _final(0) { }; //기본 생성자 + 멤버 변수 초기화
-	Core(std::istream&);
+	Core(std::istream& is) { read(is); };
 public: 
 	bool valid() const { return !_homework.empty(); } //비어있는 객체에 대한 잠재적인 예외를 회피가능
 	std::string name() const { return _name; }
@@ -27,12 +25,15 @@ private:
 	string _name;
 };
 
+bool compare_name(const Core& A, const Core& B);
 
-//대학원생
+//대학원생 [name][mid][final][thesis][hws...]
 class Grad : public Core {
 public:
-	Grad();
-	Grad(std::istream&);
+	Grad() : _thesis(0) { };
+	Grad(std::istream& is) { read(is); }; // Core() : ... -> Grad(is) { Grad::read(is); }  
+	
+
 	double grade() const;
 	std::istream& read(std::istream&);
 
