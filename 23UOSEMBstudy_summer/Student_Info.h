@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <Handle.h>
 
 class Core {
 	friend class Student_info;
@@ -21,10 +22,11 @@ public:
 
 	operator double() const;
 
-protected:
-	std::istream& read_common(std::istream&);
 	virtual Core* clone() const { return new Core(*this); }
 
+protected:
+	std::istream& read_common(std::istream&);
+	
 	double _midterm = 100.0; //직접 값 지정은 이니셜라이저보다 먼저 실행되므로, 덮어씌어진다.
 	double _final = 0.0;
 	vector<double> _homework = vector<double>(0.);
@@ -47,7 +49,9 @@ private:
 	double _thesis;
 };
 
+//인터페이스 클래스
 class Student_info {
+public:
 
 	enum Student : char {
 		core	= 'U',
@@ -55,21 +59,20 @@ class Student_info {
 	};
 
 public:
-	Student_info() : _cp(nullptr) { }
-	Student_info(std::istream& is) : _cp(nullptr) { read(is); }
-	Student_info(const Student_info& s);
-	Student_info operator= (const Student_info& s);
-
-	~Student_info(){ delete _cp; }
+	Student_info() { }
+	Student_info(std::istream& is) { read(is); }
+	//Student_info(const Student_info& s);
+	//Student_info operator= (const Student_info& s);
+	//~Student_info(){ delete _cp; }
 public:
 	std::istream& read(std::istream&);
 	std::string name() const;
 	double grade() const;
 
-	static bool compare_name(const Student_info& s1, const Student_info& s2) {
+	static bool compare_name(const Core& s1, const Core& s2) {
 		return s1.name() < s2.name();
 	}
-
 private:
-	Core* _cp;
+	Handle<Core> _cp;
 };
+

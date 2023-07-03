@@ -34,9 +34,6 @@
     <ClCompile Include="Str.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="Handle.cpp">
-      <Filter>Source Files\src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vec.h">
@@ -54,6 +51,8 @@
     <ClInclude Include="pch.h">
       <Filter>Source Files\pch</Filter>
     </ClInclude>
-    <ClInclude Include="Handle.h" />
+    <ClInclude Include="Handle.h">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

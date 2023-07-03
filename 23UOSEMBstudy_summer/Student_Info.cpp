@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Student_Info.h"]
+#include "Student_Info.h"
 #include <list>
 #include <ios> //for domain_error
 #include <numeric> //accumulate
@@ -91,27 +91,26 @@ std::istream& Grad::read(std::istream& in) {
 * Student_info
 *****************/
 
-Student_info::Student_info(const Student_info& s) :_cp(nullptr) {
-    if (s._cp)
-        _cp = s._cp->clone();
-}
-
-Student_info Student_info::operator=(const Student_info& s) {
-    if (&s != this) {
-        delete _cp;
-        if(s._cp)
-            _cp = s._cp->clone();
-        else
-            _cp = nullptr;
-    }
-    return *this;
-}
+//Student_info::Student_info(const Student_info& s) :_cp(nullptr) {
+//    if (s._cp)
+//        _cp = s._cp->clone();
+//}
+//
+//Student_info Student_info::operator=(const Student_info& s) {
+//    if (&s != this) {
+//        delete _cp;
+//        if(s._cp)
+//            _cp = s._cp->clone();
+//        else
+//            _cp = nullptr;
+//    }
+//    return *this;
+//}
 
 
 std::istream& Student_info::read(std::istream& is) {
     
-    delete _cp;  //nulltpr의 경우 아무것도 동작하지 않는다.
-
+    //delete _cp;  //nulltpr의 경우 아무것도 동작하지 않는다.
     char ch;
     is >> ch;
 
