@@ -19,6 +19,7 @@ public:
 
 	virtual std::istream& read(std::istream&);
 	virtual double grade() const;
+	virtual void regrade(double final, double thesis=0.0);
 
 	operator double() const;
 
@@ -41,6 +42,8 @@ public:
 
 	double grade() const;
 	std::istream& read(std::istream&);
+	void regrade(double final, double thesis = 0.0);
+
 
 protected:
 	Grad* clone() const { return new Grad(*this); }
@@ -69,10 +72,12 @@ public:
 	std::string name() const;
 	double grade() const;
 
+	void regrade(double final, double thesis);
+
 	static bool compare_name(const Core& s1, const Core& s2) {
 		return s1.name() < s2.name();
 	}
 private:
-	Ref_Handle<Core> _cp;
+	Ptr<Core> _cp;
 };
 

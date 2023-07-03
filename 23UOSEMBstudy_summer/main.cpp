@@ -11,8 +11,8 @@ int main(int argc, char** argv)
 {
     FASTIO;
 
-    vector<Ref_Handle<Core>> students;
-    Ref_Handle<Core> record;
+    vector<Ptr<Core>> students;
+    Ptr<Core> record;
     size_t maxlen = 0;
     char ch;
     while (cin >> ch){
@@ -26,7 +26,7 @@ int main(int argc, char** argv)
         students.push_back(record);
     }
 
-    ::sort(students.begin(), students.end(),[](const Ref_Handle<Core>&A, const Ref_Handle<Core>& B)
+    ::sort(students.begin(), students.end(),[](const Ptr<Core>&A, const Ptr<Core>& B)
         { return Student_info::compare_name(*A, *B); });
 
     for (auto& student : students) {

@@ -5,13 +5,13 @@
 
 std::istream& operator>>(std::istream& is, Str& s) {
 	
-	s._data.clear();  //clear 구현
+	s._data->clear();  //clear 구현
 	char c;
 
 	while (is.get(c) && isspace(c));
 
 	if (is) {
-		do s._data.push_back(c);
+		do s._data->push_back(c);
 		while (is.get(c) && !isspace(c));
 
 		if (is) //다시 공백 읽음
@@ -22,7 +22,7 @@ std::istream& operator>>(std::istream& is, Str& s) {
 }
 
 std::ostream& operator<<(std::ostream& os , const Str& s) {
-	for (auto c : s._data) //vec의 begin을 사용해 구현가능
+	for (auto c : *s._data) //vec의 begin을 사용해 구현가능
 		os << c;
 	return os;
 }

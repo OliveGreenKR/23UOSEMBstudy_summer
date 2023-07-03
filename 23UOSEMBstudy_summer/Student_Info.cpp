@@ -63,6 +63,10 @@ double Core::grade() const {
     return ::grade(_midterm, _final, _homework);  
 }
 
+void Core::regrade(double final, double thesis) {
+    _final = final;
+}
+
 Core::operator double() const {
     return grade();
 }
@@ -84,6 +88,11 @@ std::istream& Grad::read(std::istream& in) {
     in >> _thesis;
     read_hw(in, _homework);
     return in;
+}
+
+void Grad::regrade(double final, double thesis) {
+    _final = final;
+    _thesis = thesis;
 }
 
 
@@ -132,4 +141,13 @@ double Student_info::grade() const {
     if(_cp)
         return _cp->grade();
     throw std::runtime_error("uninitiallized Student");
+}
+
+void Student_info::regrade(double final, double thesis) {
+    _cp.make_unique(); //복사본 생성
+
+    if(_cp)
+        _cp->regrade(final,thesis);
+    else
+        throw runtime_error("regrade of unknown student");
 }
