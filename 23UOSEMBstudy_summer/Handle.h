@@ -1,5 +1,10 @@
 #pragma once
 #include <stdexcept>
+template <class T>
+T* clone(const T* tp) {
+	return tp->clone();
+}
+
 //Memory Handler
 template <class T>
 class Ptr {
@@ -10,7 +15,7 @@ public:
 		if (*_refPtr != 1) {
 			--* _refPtr;
 			_refPtr = new size_t(1);
-			_p = _p ? _p->clone() : nullptr;
+			_p = _p ? ::clone(_p) : nullptr;
 		}
 	}
 
@@ -74,11 +79,14 @@ T* Ptr<T>::operator->() const {
 /*
 현재의 Ptr을 더욱개선해보자.
 
-Ptr을 사용해서 Str을 다시 구현한다면?
+make_unique에서 _p->clone() 을 호출한다.
 
-Str클래스는 이미 존재하는 객체 2개를 결합하여 새로운 객체를 만들려고 
-암묵적으로 여러 문자를 복사한다.
+따라서 현재의 Ptr 클래스를 사용하기 위해서는 바인딩된 모든 클래스가
+clone()을 멤버로 가지고 있어야한다. 그러나 Ptr에서는 Vec의 정의문을 바꿀 수 없다.
 
-이러한 복사를 줄이고 싶어서 당신은 참조 카운트를 적용하고 싶다고 한다면?
+그렇다면 간접 접근 단계를 통해 해결해보자.
+
+clone을 멤버함수가 아닌, 제네릭 전역 함수로 정의한다면?
+필요한 타입에는 재정의를 하여 문제를 보완할 할 수 있다.( 템플릿 전문화 )
 
 */

@@ -3,6 +3,13 @@
 #include <algorithm>
 #include <iterator>  //back_inserter()
 #include "Handle.h"
+
+//템플릿 전문화 (template specialization)
+template <>
+Vec<char>* clone(const Vec<char>* vp) {
+	return new Vec<char>(*vp);
+}
+
 class Str {
 
 	//멤버 변수에 접근 권한 부여
