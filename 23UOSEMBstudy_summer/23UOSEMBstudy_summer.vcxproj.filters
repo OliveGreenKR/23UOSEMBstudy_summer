@@ -52,7 +52,7 @@
       <Filter>Source Files\pch</Filter>
     </ClInclude>
     <ClInclude Include="Handle.h">
-      <Filter>Source Files\src</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

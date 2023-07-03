@@ -73,6 +73,6 @@ public:
 		return s1.name() < s2.name();
 	}
 private:
-	Handle<Core> _cp;
+	Ref_Handle<Core> _cp;
 };
 
