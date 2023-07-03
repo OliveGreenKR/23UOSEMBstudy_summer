@@ -54,8 +54,3 @@ private:
 std::istream& operator>>(std::istream&, Str&);
 std::ostream& operator<<(std::ostream&, const Str&);
 Str operator+ (const Str& s, const Str& t);
-
-
-/*
-위의 클래스는 정상 동작할까? 한번 빌드해보자
-*/

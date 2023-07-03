@@ -40,9 +40,9 @@ public:
 	Grad() : _thesis(0) { };
 	Grad(std::istream& is) { read(is); };
 
-	double grade() const;
+	double grade() const override;
 	std::istream& read(std::istream&);
-	void regrade(double final, double thesis = 0.0);
+	void regrade(double final, double thesis = 0.0) override;
 
 
 protected:
