@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "myStr.h"
+#include "Picture.h"
 #include <cctype>
 #include <algorithm>
 #include <iostream>

@@ -19,7 +19,7 @@
     <ClCompile Include="Student_Info.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
-    <ClCompile Include="myStr.cpp">
+    <ClCompile Include="Picture.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -42,7 +42,7 @@
     <ClInclude Include="Student_Info.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="myStr.h">
+    <ClInclude Include="Picture.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Str.h">

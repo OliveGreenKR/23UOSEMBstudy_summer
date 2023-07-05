@@ -3,7 +3,7 @@
 #include <iomanip>  //setprecision
 #include <map>
 #include <algorithm>
-#include "myStr.h"
+#include "Picture.h"
 #include "Student_info.h"
 #include "Handle.h"
 
