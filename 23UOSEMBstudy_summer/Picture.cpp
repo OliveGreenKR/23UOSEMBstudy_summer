@@ -236,6 +236,32 @@ void HCat_Pic::display(std::ostream& os, ht_sz row, bool do_pad) const {
 /************
 * Frame_Pic
 ************/
-void Frame_Pic::display(std::ostream&, ht_sz, bool) const {
+void Frame_Pic::display(std::ostream& os , ht_sz row , bool do_pad) const {
+
+	//works only border=1,space=1
+	static const string border(border_size,'*');
+	
+	if (row >= height()) {
+		if(do_pad)
+			pad(os,0,width());
+	}
+	else {
+		//최상단  또는 최하단 테두리
+		if ( (0 <= row && row < border_size) || (row <= height() - border_size) ) {
+			os << string(width(), '*');
+		}
+		//테두리와 내부 문자 구분 행(공백)
+		else if (row == 1 || row == height() - 2) {
+			os << "*";
+			pad(os,1,width()-1);
+			os << "*";
+		}
+		//내부 문자
+		else {
+			os << "*";
+			_p->display(os, row -2, true);
+			os << "*";
+		}
+	}
 
 }

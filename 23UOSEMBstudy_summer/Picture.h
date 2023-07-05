@@ -120,7 +120,7 @@ class Picture {
 	friend std::ostream& operator<< (std::ostream& os, const Picture& pic);
 
 public:
-	Picture(const std::vector<string>& = std::vector<string>());
+	Picture(const std::vector<string> &v = std::vector<string>()) : _p(new String_Pic(v)) { };
 
 	static Picture frame(const Picture& pic);
 	static Picture vcat(const Picture& top, const Picture& bottom);
