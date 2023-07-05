@@ -21,6 +21,10 @@ class Picture;
 
 class Pic_base {
 
+	friend class String_Pic;
+	friend class Frame_Pic;
+	friend class VCat_Pic;
+	friend class HCat_Pic;
 	friend std::ostream& operator<< (std::ostream& os, const Picture& pic);
 
 protected:
@@ -38,9 +42,7 @@ protected:
 	* 
 	* 추상 기본 클래스이지만 멤버 함수를 정의할 수가 있다. 기본 클래스의 객체의 존재 유무와 멤버함수의 유무는
 	* 상관이 없기 때문.
-	* 
 	*/
-
 private:
 	virtual wd_sz width() const		= 0;
 	virtual ht_sz height() const	= 0;
@@ -69,10 +71,13 @@ class Frame_Pic : public Pic_base {
 	friend class Picture;
 
 private:
+	static const int border_size = 1;
+	static const int space_size = 1;
+
 	Frame_Pic(const Ptr<Pic_base>& pic) : _p(pic) { }
 
-	wd_sz width() const override;
-	ht_sz height() const override;
+	wd_sz width() const override { return _p->width() + 2*(border_size+space_size); }
+	ht_sz height() const override { return _p->height() + 2*(border_size+space_size); }
 	void display(std::ostream&, ht_sz, bool) const override;
 
 private:
@@ -82,13 +87,12 @@ private:
 class VCat_Pic : public Pic_base {
 
 	friend class Picture;
-
 private:
 	VCat_Pic(const Ptr<Pic_base>& t , const Ptr<Pic_base>& b) : _top(t), _bottom(b) { }
 
-	wd_sz width() const override;
-	ht_sz height() const override;
-	void display(std::ostream&, ht_sz, bool) const override;
+	wd_sz width() const override { return std::max(_top->width(),_bottom->width()); }
+	ht_sz height() const override { return _top->height() + _bottom->height(); }
+	void display(std::ostream& , ht_sz, bool) const override;
 
 private:
 	Ptr<Pic_base> _top, _bottom;
@@ -99,14 +103,14 @@ class HCat_Pic : public Pic_base {
 	friend class Picture;
 
 private:
-	HCat_Pic(const Ptr<Pic_base>& l, const Ptr<Pic_base>& r) : _leff(l), _right(r) { }
+	HCat_Pic(const Ptr<Pic_base>& l, const Ptr<Pic_base>& r) : _left(l), _right(r) { }
 
-	wd_sz width() const override;
-	ht_sz height() const override;
+	wd_sz width() const override { return _left->width() + _right->width(); }
+	ht_sz height() const override { return std::max(_left->height(),_right->height()); }
 	void display(std::ostream&, ht_sz, bool) const override;
 
 private:
-	Ptr<Pic_base> _leff, _right;
+	Ptr<Pic_base> _left, _right;
 };
 
 //인터페이스 클래스
@@ -129,7 +133,4 @@ private:
 	Ptr<Pic_base> _p;
 };
 
-//Picture frame(const Picture& pic);
-//Picture vcat(const Picture& top, const Picture& bottom);
-//Picture hcat(const Picture& left, const Picture& right);
 std::ostream& operator<< (std::ostream& os, const Picture& pic);

@@ -205,3 +205,37 @@ void String_Pic::display(std::ostream& os , ht_sz row, bool do_pad) const {
 	}
 	
 }
+/************
+* VCat_Pic
+************/
+void VCat_Pic::display(std::ostream& os , ht_sz row , bool do_pad ) const {
+
+	wd_sz w = 0;
+	if (row < _top->height()) {
+		//위쪽 하위 문자 그림
+		_top->display(os,row,do_pad);
+		w = _top->width();
+	}
+	else if (row < height()) {
+		//아래쪽
+		_bottom->display(os, row - _top->height() , do_pad);
+		w =  _bottom->width();
+	}
+	if (do_pad) {
+		pad(os,w,width());
+	}
+}
+
+/************
+* HCat_Pic
+************/
+void HCat_Pic::display(std::ostream& os, ht_sz row, bool do_pad) const {
+	_left->display(os, row, do_pad || row < _right->height());
+	_right->display(os,row,do_pad);
+}
+/************
+* Frame_Pic
+************/
+void Frame_Pic::display(std::ostream&, ht_sz, bool) const {
+
+}
