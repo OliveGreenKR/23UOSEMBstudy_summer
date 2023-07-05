@@ -2,7 +2,7 @@
 #include "Picture.h"
 #include <cctype>
 #include <algorithm>
-#include <iostream>
+
 //
 ////반복자를 통해 split 확장성 증가시켜보기
 //template < class Out>
@@ -154,7 +154,7 @@
 * Picture
 ************/
 
-Picture frame(const Picture& pic) {
+Picture Picture::frame(const Picture& pic) {
 	/*
 	* Pic_base* temp1 =  new Frame_Pic(pic._p);
 	* Picture temp2(temp1);
@@ -164,11 +164,11 @@ Picture frame(const Picture& pic) {
 	return new Frame_Pic(pic._p);  //생성자로 인해 암묵적 conversion발생
 }
 
-Picture vcat(const Picture& top, const Picture& bottom) {
+Picture Picture::vcat(const Picture& top, const Picture& bottom) {
 	return new VCat_Pic(top._p, bottom._p);
 }
 
-Picture hcat(const Picture& left, const Picture& right) {
+Picture Picture::hcat(const Picture& left, const Picture& right) {
 	return new HCat_Pic(left._p, right._p);
 }
 
@@ -180,4 +180,28 @@ std::ostream& operator<<(std::ostream& os, const Picture& pic) {
 		os << "\n";
 	}
 	return os;
+}
+
+/************
+* String_Pic
+************/
+Pic_base::wd_sz String_Pic::width() const {
+	Pic_base::wd_sz maxLen = 0;
+	for (auto& s : _data) {
+		maxLen = std::max(maxLen,s.size());
+	}
+	return maxLen;
+}
+
+void String_Pic::display(std::ostream& os , ht_sz row, bool do_pad) const {
+	Pic_base::wd_sz start = 0;
+
+	if (row < height()) {
+		os << _data[row];
+		start = _data[row].size();
+		
+		if(do_pad)
+			pad(os,start,width());
+	}
+	
 }
