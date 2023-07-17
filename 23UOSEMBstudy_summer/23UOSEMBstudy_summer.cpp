@@ -6,16 +6,9 @@
 using namespace std;
 //using std::cin;
 
-
 template <typename T>
 void print(T arg) {
     std::cout << arg << std::endl;
-}
-
-template <typename T, typename... Types>
-void print(T arg, Types... args) {
-    std::cout << arg << ", ";
-    print(args...);
 }
 
 template<>
@@ -24,12 +17,21 @@ void print(double arg) {
     std::cout << setprecision(3) << arg << setprecision(prec) << std::endl;
 }
 
-template <typename , typename... Types>
+template <typename... Types>
 void print(double arg, Types... args) {
     streamsize prec = cout.precision();
     std::cout << setprecision(3) << arg << setprecision(prec) << ", ";
     print(args...);
 }
+
+
+
+template <typename T, typename... Types>
+void print(T arg, Types... args) {
+    std::cout << arg << ", ";
+    print(args...);
+}
+
 
 
 int main()
