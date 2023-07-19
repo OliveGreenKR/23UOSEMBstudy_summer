@@ -3,33 +3,37 @@
 #include <iomanip>  //setprecision
 #include <map>
 #include <algorithm>
-#include "Student_Info.h"
-#include "myStr.h"
-
+#include "Picture.h"
+#include "Student_info.h"
+#include "Handle.h"
 
 int main(int argc, char** argv)
 {
-    //argc =  명령어 개수, 기본 1개(실행파일 이름)
-    //argv = 명령어 포인터
-    
     FASTIO;
-    
-    vector<Student_Info> students;
-    Student_Info record;
 
+    vector<Ptr<Core>> students;
+    Ptr<Core> record;
     size_t maxlen = 0;
-    while (record.read(cin)) {
-        maxlen = ::max(maxlen, record.name().size());
+    char ch;
+    while (cin >> ch){
+        if(ch == Student_info::core)
+            record = new Core;
+        else
+            record = new Grad;
+
+        record -> read(cin);
+        maxlen =  max(maxlen, record->name().size());
         students.push_back(record);
     }
 
-    ::sort(students.begin(), students.end(), compare_name);
+    ::sort(students.begin(), students.end(),[](const Ptr<Core>&A, const Ptr<Core>& B)
+        { return Student_info::compare_name(*A, *B); });
 
     for (auto& student : students) {
-        cout << student.name() << string(maxlen+1-student.name().size(), ' ');
+        cout << student->name() << string(maxlen+1-student->name().size(), ' ');
 
         try {
-            double final_grade = student.grade();
+            double final_grade = student->grade();
             streamsize prec = cout.precision();
             cout << setprecision(3) << final_grade << setprecision(prec) << endl;
         }
@@ -40,5 +44,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
 
